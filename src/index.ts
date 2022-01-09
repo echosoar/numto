@@ -1,8 +1,8 @@
 import { cnDefine, defineToStr, transfromNumber } from "./utils";
 
 class NumTo {
-  integer: number[];
-  decimal: number[];
+  integer: number[] = [];
+  decimal: number[] = [];
   isNegative = false;
   constructor(num: string) {
     if (/^-?\d+(?:\.\d+)?/.test(num)) {
@@ -20,7 +20,49 @@ class NumTo {
         this.decimal = decimalPart.split('').map(numStr => +numStr);
       }
     } else if (/[零一二三四五六七八九十]/.test(num)) {
+      if (num[0] === '负') {
+        this.isNegative = true;
+        num = num.slice(1);
+      }
+      const numberParts = num.split('点');
 
+      let number = 0;
+      let baseMag = 1;
+      let currentMag = 1;
+      const integerPart = numberParts[0]?.split('') || [];
+      if (integerPart[0] === '十') {
+        integerPart.unshift('一');
+      }
+      const units = cnDefine.unit.concat({
+        text: '亿',
+        baseline: true,
+        mag: 100000000,
+      });
+      while(integerPart.length) {
+        const lastNum = integerPart.pop();
+        const isUnit = units.find(unitInfo => unitInfo.text === lastNum);
+        if (isUnit) {
+          if (isUnit.baseline) {
+            if (isUnit.mag > baseMag) {
+              baseMag = isUnit.mag
+            } else {
+              baseMag *= isUnit.mag;
+            }
+            currentMag = 1;
+          } else {
+            currentMag = isUnit.mag;
+          }
+        } else {
+          const currentNum = cnDefine.number.findIndex(num => num === lastNum);
+          number += currentNum * baseMag * currentMag;
+        }
+      }
+      this.integer = String(number).split('').map(numStr => +numStr);
+      if (numberParts[1]) {
+        this.decimal = numberParts[1].split('').map(numStr => {
+          return cnDefine.number.findIndex(num => num === numStr);
+        });
+      }
     }
   }
 

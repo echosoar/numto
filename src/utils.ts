@@ -5,16 +5,20 @@ export const cnDefine: langDefine = {
   unit: [
     {
       text: '十',
+      mag: 10,
     },
     {
       text: '百',
+      mag: 100,
     },
     {
       text: '千',
+      mag: 1000,
     },
     {
       text: '万',
-      zero: true,
+      baseline: true,
+      mag: 10000,
     },
   ],
   format: (value: string): string => {
@@ -26,7 +30,7 @@ export const cnDefine: langDefine = {
   },
   unitMap: {
     '万万': '亿',
-  }
+  },
 }
 
 export const defineToStr = (numberList: number[], langDefine: langDefine) => {
@@ -61,7 +65,7 @@ export const defineToStr = (numberList: number[], langDefine: langDefine) => {
     if (index > 0) {
       const unitInfo = langUnit[index - 1];
       if (currentNumber === 0) {
-        if (unitInfo.zero) {
+        if (unitInfo.baseline) {
           numberStr = '';
           unit = unitInfo.text;
         }
