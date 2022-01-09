@@ -1,10 +1,17 @@
 {
   "name": "numto",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "强鲁棒性、极小、超快的数字互转库，支持阿拉伯、中文、英文数字互转，一百二十三点零四 = 123.04 = one hundred and twenty-three point zero four",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "rm -rf dist && esbuild src/* --outdir=dist --platform=node --format=cjs",
+    "test": "mw test",
+    "coverage": "jest --coverage",
+    "clean": "rm -rf node_modules/ package-lock.json dist"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/echosoar/numto.git"
@@ -12,6 +19,14 @@
   "keywords": [
     "number"
   ],
+  "devDependencies": {
+    "@midwayjs/cli": "^1.2.93",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^10.17.60",
+    "esbuild": "^0.13.8",
+    "jest": "^27.4.7",
+    "typescript": "^4.1.0"
+  },
   "author": "echosoar",
   "license": "MIT",
   "bugs": {

@@ -1,6 +1,6 @@
 # numto
 
-强鲁棒性、极小、超快的数字互转库，支持阿拉伯、中文、英文数字互转，一百二十三点零四 = 123.04 = one hundred and twenty-three point zero four
+强鲁棒性、极小、超快的数字互转库，支持阿拉伯、中文数字互转，负一百二十三点零四 = -123.04 
 
 ## 使用
 
@@ -12,10 +12,13 @@ $ npm i numto --save
 
 import NumTo from 'numto';
 
-NumTo(123.04).cn()            // 一百二十三点零四
-NumTo(123.04).en()            // one hundred and twenty-three point zero four
-NumTo('一百二十三点零四').num()  // 123.04
-NumTo('一百二十三点零四').en()   // one hundred and twenty-three point zero four
+NumTo(40321012304.0102).cn()
+// 四百零三亿二千一百零一万二千三百零四点零一零二
+
+
+NumTo('四百零三亿二千一百零一万二千三百零四点零一零二').number()
+// 40321012304.0102
+
 ```
 
 ---
