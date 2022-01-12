@@ -19,12 +19,12 @@ class NumTo {
       if (decimalPart) {
         this.decimal = decimalPart.split('').map(numStr => +numStr);
       }
-    } else if (/[零一二三四五六七八九十]/.test(num)) {
+    } else if (/^[零一二两三四五六七八九十百千万亿点负]+$/.test(num)) {
       if (num[0] === '负') {
         this.isNegative = true;
         num = num.slice(1);
       }
-      const numberParts = num.split('点');
+      const numberParts = num.replace(/两/g, '二').split('点');
 
       let number = 0;
       let baseMag = 1;

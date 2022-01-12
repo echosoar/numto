@@ -1,6 +1,10 @@
 # numto
 
-强鲁棒性、极小、超快的数字互转库，支持阿拉伯、中文数字互转，负一百二十三点零四 = -123.04 
+数字互转库，支持阿拉伯、中文数字互转，负一百二十三点零四 = -123.04 
+
+[![npm](https://img.shields.io/npm/v/numto.svg?style=flat)](https://www.npmjs.org/package/numto)
+
+<br />
 
 ## 使用
 
